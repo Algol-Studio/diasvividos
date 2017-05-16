@@ -17,14 +17,14 @@ import java.util.Locale;
 
 public class Nascimento_input extends AppCompatActivity{
 
-    EditText Edit_Time = (EditText) findViewById(R.id.hora);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nascimento_input);
 
-    Edit_Time.setOnClickListener(new View.OnClickListener() {
+        final EditText Edit_Time = (EditText) findViewById(R.id.hora);
+        Edit_Time.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             // TODO Auto-generated method stub
