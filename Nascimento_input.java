@@ -1,49 +1,54 @@
 package algol.diasvividos;
 
-import android.app.DatePickerDialog;
+import android.app.Activity;
 import android.app.TimePickerDialog;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
-public class Nascimento_input extends AppCompatActivity{
+public class Nascimento_input extends AppCompatActivity implements View.OnClickListener {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nascimento_input);
-
         final EditText Edit_Time = (EditText) findViewById(R.id.hora);
-        Edit_Time.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            // TODO Auto-generated method stub
-            Calendar mcurrentTime = Calendar.getInstance();
-            int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-            int minute = mcurrentTime.get(Calendar.MINUTE);
+        Edit_Time.setOnClickListener(this);
+        final EditText Edit_Data = (EditText) findViewById(R.id.data);
+        Edit_Data.setOnClickListener(this);
 
-            TimePickerDialog mTimePicker;
-            mTimePicker = new TimePickerDialog(Nascimento_input.this, new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                    Edit_Time.setText( selectedHour + ":" + selectedMinute);
-                }
-            }, hour, minute, true);
-            mTimePicker.setTitle("Select Time");
-            mTimePicker.show();
-        }
+
     }
-    );}
+        @Override
+        public void onClick(View v){
+            switch (v.getId()) {
+                case R.id.hora:
+                    Calendar mcurrentTime = Calendar.getInstance();
+                    int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                    int minute = mcurrentTime.get(Calendar.MINUTE);
+
+                    TimePickerDialog mTimePicker;
+                    mTimePicker = new TimePickerDialog(Nascimento_input.this, new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                            ((EditText) findViewById(R.id.hora)).setText(selectedHour + ":" + selectedMinute);
+                        }
+                    }, hour, minute, true);
+                    mTimePicker.setTitle("Que horas você nasceu?");
+                    mTimePicker.show();
+                    break;
+                case R.id.data:
+                    ((EditText)findViewById(R.id.data)).setText("2000");
+                    break;
+                default:
+                    break;
+            }
+        }
 
 /*    Calendar myCalendar = Calendar.getInstance();
    // DatePicker DatePickerDialog = (DatePicker) findViewById(R.id.datePicker);
