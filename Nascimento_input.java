@@ -43,7 +43,7 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
                     mTimePicker.show();
                     break;
                 case R.id.data:
-                    ((EditText)findViewById(R.id.data)).setText("20000");
+                    ((EditText)findViewById(R.id.data)).setText("2000");
                     break;
                 default:
                     break;
