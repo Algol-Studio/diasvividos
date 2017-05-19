@@ -22,7 +22,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintHorizontal_bias="0.838"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/data" />
+        app:layout_constraintTop_toBottomOf="@+id/hora" />
 
     <TextView
         android:id="@+id/textView2"
@@ -37,34 +37,34 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintHorizontal_bias="0.235"
-        app:layout_constraintTop_toBottomOf="@+id/hora" />
+        app:layout_constraintTop_toBottomOf="@+id/data" />
 
     <EditText
-        android:id="@+id/data"
+        android:id="@+id/hora"
         android:layout_width="150dp"
         android:layout_height="0dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:ems="10"
-        android:inputType="date"
+        android:inputType="none"
         android:focusable="false"
-        android:onClick="onClickdata"
+        android:onClick="onClickhora"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="@+id/hora"
-        app:layout_constraintTop_toTopOf="@+id/hora" />
+        app:layout_constraintBottom_toBottomOf="@+id/data"
+        app:layout_constraintTop_toTopOf="@+id/data" />
 
     <EditText
-        android:id="@+id/hora"
+        android:id="@+id/data"
         android:layout_width="150dp"
         android:layout_height="42dp"
         android:layout_marginLeft="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="88dp"
         android:ems="10"
-        android:inputType="date"
-        android:onClick="onClick"
+        android:inputType="none"
+        android:onClick="onClickdata"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
@@ -151,12 +151,15 @@
 
     </RadioGroup>
 
-    <DatePicker
-        android:id="@+id/datePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        tools:layout_editor_absoluteX="17dp"
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="206dp"
+        android:layout_height="42dp"
+        android:clickable="false"
+        android:text="Nascimento"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        tools:layout_editor_absoluteX="89dp"
         tools:layout_editor_absoluteY="38dp" />
 
 </android.support.constraint.ConstraintLayout>
