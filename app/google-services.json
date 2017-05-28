@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "38568745798",
+    "firebase_url": "https://dias-vividos.firebaseio.com",
+    "project_id": "dias-vividos",
+    "storage_bucket": "dias-vividos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:38568745798:android:5688e102cdb6255b",
+        "android_client_info": {
+          "package_name": "algol.diasvividos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "38568745798-9j25oriklpm9l6ha0dblfmivjb4k72ua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSLmCrt1NBDvMQ70n8aDC63m7eD40DlpM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

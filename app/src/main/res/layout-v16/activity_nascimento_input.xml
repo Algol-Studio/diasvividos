@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif"
-        android:text="Horário"
+        android:text="@string/horario"
         android:textSize="30sp"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="parent"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="serif"
-        android:text="Dia"
+        android:text="@string/dia"
         android:textSize="30sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -49,7 +49,6 @@
         android:ems="10"
         android:inputType="none"
         android:focusable="false"
-        android:onClick="onClickhora"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintBottom_creator="1"
@@ -65,7 +64,7 @@
         android:layout_marginTop="88dp"
         android:ems="10"
         android:inputType="none"
-        android:onClick="onClickdata"
+        android:focusable="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
@@ -73,16 +72,18 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="115dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
-        android:text="Dia"
+        android:layout_width="77dp"
+        android:layout_height="43dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/dias"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1" />
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginTop="8dp"
+        ads:layout_constraintTop_toBottomOf="@+id/data"
+        ads:layout_constraintVertical_bias="0.684"
+        tools:ignore="RtlHardcoded" />
 
     <RadioGroup
         android:layout_width="109dp"
@@ -102,42 +103,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Segundos" />
+            android:text="@string/segundos" />
 
         <RadioButton
             android:id="@+id/radioButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Minutos" />
+            android:text="@string/minutos" />
 
         <RadioButton
             android:id="@+id/radioButton6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Horas" />
+            android:text="@string/horas" />
 
         <RadioButton
             android:id="@+id/radioButton5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Dias" />
+            android:text="@string/diasBotao" />
 
         <RadioButton
             android:id="@+id/radioButton4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Semanas" />
+            android:text="@string/semanas" />
 
         <RadioButton
             android:id="@+id/radioButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Meses" />
+            android:text="@string/meses" />
 
     </RadioGroup>
 
@@ -145,30 +146,30 @@
         android:id="@+id/textView3"
         android:layout_width="206dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="50dp"
-        android:layout_marginTop="38dp"
         android:clickable="false"
-        android:text="Nascimento"
+        android:text="@string/nascimento"
         android:textAlignment="center"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="@+id/data"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="@+id/data"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="38dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintTop_creator="1"
         android:layout_marginStart="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="-22dp"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="2dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="32dp"
         ads:adSize="BANNER"
