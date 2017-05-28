@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.google.android.gms.ads.AdSize;
@@ -16,6 +17,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Nascimento_input extends AppCompatActivity implements View.OnClickListener {
     //private AdView adView;
@@ -36,6 +38,7 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
         //AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
+        mudaResultado();
 
 
     }
@@ -51,7 +54,10 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
                     mTimePicker = new TimePickerDialog(Nascimento_input.this, new TimePickerDialog.OnTimeSetListener() {
                         @Override
                         public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                            ((EditText) findViewById(R.id.hora)).setText(selectedHour + ":" + selectedMinute);
+                            if (selectedMinute>10){
+                            ((EditText) findViewById(R.id.hora)).setText(selectedHour + ":" + selectedMinute);}
+                            else{((EditText) findViewById(R.id.hora)).setText(selectedHour + ":0" + selectedMinute);}
+                            mudaResultado();
                         }
                     }, hour, minute, true);
                     mTimePicker.setTitle("Que horas você nasceu?");
@@ -67,6 +73,7 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMounth, int selectedDay) {
                             ((EditText) findViewById(R.id.data)).setText(selectedDay + "/" + (selectedMounth+1)+"/"+selectedYear);
+                            mudaResultado();
                         }
                     }, ano, mes, dia);
                     mDatePicker.setTitle("Que dia você nasceu?");
@@ -75,6 +82,30 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
                 default:
                     break;
             }
+        }
+
+        public void mudaResultado(){
+            Calendar mcurrent = Calendar.getInstance();
+            int hour = mcurrent.get(Calendar.HOUR_OF_DAY);
+            int minute = mcurrent.get(Calendar.MINUTE);
+            int second = mcurrent.get(Calendar.SECOND);
+            int ano = mcurrent.get(Calendar.YEAR);
+            int mes = mcurrent.get(Calendar.MONTH);
+            int dia = mcurrent.get(Calendar.DAY_OF_MONTH);
+            Calendar calendar = new GregorianCalendar(ano,mes,dia,hour,minute,second);
+            double atual = GetJulianDate(calendar);
+            String diaIn=((TextView) findViewById(R.id.data)).getText().toString();
+            int dia1= Integer.parseInt(diaIn.substring(0,diaIn.indexOf("/")));
+            diaIn=diaIn.substring(diaIn.indexOf("/")+1);
+            int mes1= Integer.parseInt(diaIn.substring(0,diaIn.indexOf("/")))-1;
+            int ano1=Integer.parseInt(diaIn.substring(diaIn.indexOf("/")+1));
+            String horaIn=((TextView) findViewById(R.id.hora)).getText().toString();
+            int hora1= Integer.parseInt(horaIn.substring(0,horaIn.indexOf(":")));
+            int minuto1=Integer.parseInt(horaIn.substring(horaIn.indexOf(":")+1));
+            calendar = new GregorianCalendar(ano1,mes1,dia1,hora1,minuto1);
+            double nasceu = GetJulianDate(calendar);
+            //((TextView) findViewById(R.id.textView4)).setText(minuto1);
+            ((TextView) findViewById(R.id.textView4)).setText(String.valueOf((int) (atual-nasceu)));
         }
 
 /*    Calendar myCalendar = Calendar.getInstance();
