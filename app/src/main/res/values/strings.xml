@@ -11,4 +11,7 @@
     <string name="segundos">Segundos</string>
     <string name="semanas">Semanas</string>
     <string name="banner_ad_unit_id">ca-app-pub-3080914425533160/9031585332</string>
+    <string name="resultado">0</string>
+    <string name="horaInputada">0:00</string>
+    <string name="diaInputado">1/1/2000</string>
 </resources>

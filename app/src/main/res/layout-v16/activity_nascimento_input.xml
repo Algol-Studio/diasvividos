@@ -47,13 +47,15 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:ems="10"
-        android:inputType="none"
         android:focusable="false"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintBottom_creator="1"
+        android:inputType="none"
+        android:text="@string/horaInputada"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/data"
-        app:layout_constraintTop_toTopOf="@+id/data" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/data"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintTop_creator="1" />
 
     <EditText
         android:id="@+id/data"
@@ -63,8 +65,10 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="88dp"
         android:ems="10"
-        android:inputType="none"
         android:focusable="false"
+        android:inputType="none"
+        android:text="@string/diaInputado"
+        android:textAlignment="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
@@ -72,8 +76,8 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="77dp"
-        android:layout_height="43dp"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
         android:layout_marginLeft="16dp"
         android:text="@string/dias"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -83,20 +87,73 @@
         android:layout_marginTop="8dp"
         ads:layout_constraintTop_toBottomOf="@+id/data"
         ads:layout_constraintVertical_bias="0.684"
-        tools:ignore="RtlHardcoded" />
+        tools:ignore="RtlHardcoded"
+        android:layout_marginStart="16dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="206dp"
+        android:layout_height="42dp"
+        android:clickable="false"
+        android:text="@string/nascimento"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="@+id/data"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="38dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="32dp"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="32dp"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"/>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/resultado"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="15dp"
+        ads:layout_constraintBottom_toBottomOf="@+id/button"
+        android:layout_marginEnd="16dp"
+        ads:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        ads:layout_constraintTop_toTopOf="@+id/button"
+        ads:layout_constraintLeft_toRightOf="@+id/radioGroup"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="16dp" />
 
     <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="109dp"
         android:layout_height="192dp"
-        android:visibility="invisible"
-        tools:layout_constraintBottom_creator="1"
-        android:layout_marginStart="34dp"
-        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="51dp"
         android:layout_marginLeft="34dp"
-        app:layout_constraintLeft_toLeftOf="@+id/button"
+        android:layout_marginStart="34dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="44dp"
-        android:id="@+id/radioGroup">
+        app:layout_constraintLeft_toLeftOf="@+id/button"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1">
 
         <RadioButton
             android:id="@+id/radioButton"
@@ -141,38 +198,5 @@
             android:text="@string/meses" />
 
     </RadioGroup>
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="206dp"
-        android:layout_height="42dp"
-        android:clickable="false"
-        android:text="@string/nascimento"
-        android:textAlignment="center"
-        android:textSize="36sp"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="@+id/data"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="38dp"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_constraintTop_creator="1"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="-22dp"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="32dp"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"/>
 
 </android.support.constraint.ConstraintLayout>
