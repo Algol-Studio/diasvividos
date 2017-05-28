@@ -1,26 +1,41 @@
 package algol.diasvividos;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.Calendar;
 
 public class Nascimento_input extends AppCompatActivity implements View.OnClickListener {
-
+    //private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nascimento_input);
+        MobileAds.initialize(this,"ca-app-pub-3080914425533160~1647919339");
         final EditText Edit_Time = (EditText) findViewById(R.id.hora);
         Edit_Time.setOnClickListener(this);
         final EditText Edit_Data = (EditText) findViewById(R.id.data);
         Edit_Data.setOnClickListener(this);
+        AdView adView = (AdView)findViewById(R.id.adView2);
+        //adView.setAdSize(AdSize.BANNER);
+        //adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        //adView = (AdView)findViewById(R.id.adView);
+        //AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
 
     }
@@ -43,7 +58,19 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
                     mTimePicker.show();
                     break;
                 case R.id.data:
-                    ((EditText)findViewById(R.id.data)).setText("20000");
+                    Calendar mcurrentDay = Calendar.getInstance();
+                    int ano = mcurrentDay.get(Calendar.YEAR);
+                    int mes = mcurrentDay.get(Calendar.MONTH);
+                    int dia = mcurrentDay.get(Calendar.DAY_OF_MONTH);
+                    DatePickerDialog mDatePicker;
+                    mDatePicker = new DatePickerDialog(Nascimento_input.this, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMounth, int selectedDay) {
+                            ((EditText) findViewById(R.id.data)).setText(selectedDay + "/" + (selectedMounth+1)+"/"+selectedYear);
+                        }
+                    }, ano, mes, dia);
+                    mDatePicker.setTitle("Que dia você nasceu?");
+                    mDatePicker.show();
                     break;
                 default:
                     break;
