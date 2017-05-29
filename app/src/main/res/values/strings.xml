@@ -12,6 +12,17 @@
     <string name="semanas">Semanas</string>
     <string name="banner_ad_unit_id">ca-app-pub-3080914425533160/9031585332</string>
     <string name="resultado">0</string>
+    <string name="resultadoMes">0</string>
+    <string name="resultadoSemana">0</string>
+    <string name="resultadoHora">0</string>
+    <string name="resultadoMinuto">0</string>
+    <string name="resultadoSegundo">0</string>
     <string name="horaInputada">0:00</string>
     <string name="diaInputado">1/1/2000</string>
+    <string name="diasTexto">Dias</string>
+    <string name="horasTexto">Horas</string>
+    <string name="mesesTexto">Meses</string>
+    <string name="minutosTexto">Minutos</string>
+    <string name="segundosTexto">Segundos</string>
+    <string name="semanasTexto">Semanas</string>
 </resources>

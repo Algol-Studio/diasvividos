@@ -1,100 +1,116 @@
 package algol.diasvividos;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
-import java.text.SimpleDateFormat;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.util.Calendar;
-import java.util.Locale;
+import java.util.GregorianCalendar;
 
-public class Nascimento_input extends AppCompatActivity{
-
+public class Nascimento_input extends AppCompatActivity implements View.OnClickListener {
+    //private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nascimento_input);
-
+        MobileAds.initialize(this,"ca-app-pub-3080914425533160~1647919339");
         final EditText Edit_Time = (EditText) findViewById(R.id.hora);
-        Edit_Time.setOnClickListener(new View.OnClickListener() {
+        Edit_Time.setOnClickListener(this);
+        final EditText Edit_Data = (EditText) findViewById(R.id.data);
+        Edit_Data.setOnClickListener(this);
+        AdView adView = (AdView)findViewById(R.id.adView2);
+        //adView.setAdSize(AdSize.BANNER);
+        //adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        //adView = (AdView)findViewById(R.id.adView);
+        //AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+        mudaResultado();
+
+
+    }
         @Override
-        public void onClick(View view) {
-            // TODO Auto-generated method stub
-            Calendar mcurrentTime = Calendar.getInstance();
-            int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-            int minute = mcurrentTime.get(Calendar.MINUTE);
+        public void onClick(View v){
+            switch (v.getId()) {
+                case R.id.hora:
+                    Calendar mcurrentTime = Calendar.getInstance();
+                    int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                    int minute = mcurrentTime.get(Calendar.MINUTE);
 
-            TimePickerDialog mTimePicker;
-            mTimePicker = new TimePickerDialog(Nascimento_input.this, new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                    Edit_Time.setText( selectedHour + ":" + selectedMinute);
-                }
-            }, hour, minute, true);
-            mTimePicker.setTitle("Select Time");
-            mTimePicker.show();
+                    TimePickerDialog mTimePicker;
+                    mTimePicker = new TimePickerDialog(Nascimento_input.this, new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                            if (selectedMinute>10){
+                            ((EditText) findViewById(R.id.hora)).setText(selectedHour + ":" + selectedMinute);}
+                            else{((EditText) findViewById(R.id.hora)).setText(selectedHour + ":0" + selectedMinute);}
+                            mudaResultado();
+                        }
+                    }, hour, minute, true);
+                    mTimePicker.setTitle("Que horas voc� nasceu?");
+                    mTimePicker.show();
+                    break;
+                case R.id.data:
+                    Calendar mcurrentDay = Calendar.getInstance();
+                    int ano = mcurrentDay.get(Calendar.YEAR);
+                    int mes = mcurrentDay.get(Calendar.MONTH);
+                    int dia = mcurrentDay.get(Calendar.DAY_OF_MONTH);
+                    DatePickerDialog mDatePicker;
+                    mDatePicker = new DatePickerDialog(Nascimento_input.this, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMounth, int selectedDay) {
+                            ((EditText) findViewById(R.id.data)).setText(selectedDay + "/" + (selectedMounth+1)+"/"+selectedYear);
+                            mudaResultado();
+                        }
+                    }, ano, mes, dia);
+                    mDatePicker.setTitle("Que dia voc� nasceu?");
+                    mDatePicker.show();
+                    break;
+                default:
+                    break;
+            }
         }
-    }
-    );}
 
-/*    Calendar myCalendar = Calendar.getInstance();
-   // DatePicker DatePickerDialog = (DatePicker) findViewById(R.id.datePicker);
-    EditText edittext = (EditText) findViewById(R.id.data);
-
-    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, monthOfYear);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            updateLabel();
+        public void mudaResultado(){
+            Calendar mcurrent = Calendar.getInstance();
+            int hour = mcurrent.get(Calendar.HOUR_OF_DAY);
+            int minute = mcurrent.get(Calendar.MINUTE);
+            int second = mcurrent.get(Calendar.SECOND);
+            int ano = mcurrent.get(Calendar.YEAR);
+            int mes = mcurrent.get(Calendar.MONTH);
+            int dia = mcurrent.get(Calendar.DAY_OF_MONTH);
+            Calendar calendar = new GregorianCalendar(ano,mes,dia,hour,minute,second);
+            double atual = GetJulianDate(calendar);
+            String diaIn=((TextView) findViewById(R.id.data)).getText().toString();
+            int dia1= Integer.parseInt(diaIn.substring(0,diaIn.indexOf("/")));
+            diaIn=diaIn.substring(diaIn.indexOf("/")+1);
+            int mes1= Integer.parseInt(diaIn.substring(0,diaIn.indexOf("/")))-1;
+            int ano1=Integer.parseInt(diaIn.substring(diaIn.indexOf("/")+1));
+            String horaIn=((TextView) findViewById(R.id.hora)).getText().toString();
+            int hora1= Integer.parseInt(horaIn.substring(0,horaIn.indexOf(":")));
+            int minuto1=Integer.parseInt(horaIn.substring(horaIn.indexOf(":")+1));
+            calendar = new GregorianCalendar(ano1,mes1,dia1,hora1,minuto1);
+            double nasceu = GetJulianDate(calendar);
+            ((TextView) findViewById(R.id.dias)).setText(String.valueOf((int) (atual-nasceu)));
+            ((TextView) findViewById(R.id.Meses)).setText(String.valueOf((int) (atual/30.4375-nasceu/30.4375)));
+            ((TextView) findViewById(R.id.Semanas)).setText(String.valueOf((int) (atual/7-nasceu/7)));
+            ((TextView) findViewById(R.id.horas)).setText(String.valueOf((int) (atual*24-nasceu*24)));
+            ((TextView) findViewById(R.id.Minutos)).setText(String.valueOf((int) (atual*1440-nasceu*1440)));
+            ((TextView) findViewById(R.id.Segundos)).setText(String.valueOf((int) (atual*86400-nasceu*86400)));
         }
-
-    };
-
-   edittext.setOnClickListener(new OnClickListener() {
-        //@Override
-        public void onClick(View view) {
-            new DatePickerDialog(classname.this, date, myCalendar
-                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                    myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-        }
-    });
-
-    private void updateLabel() {
-
-        String myFormat = "MM/dd/yy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
-        edittext.setText(sdf.format(myCalendar.getTime()));
-    }
-
-    EditText data,hora;
-    int year,month,day;
-
-    public void showDate(){
-        data = (EditText)findViewById(R.id.data);
-        data.setOnClickListener(
-                new View.OnClickListener(){
-                    @Override
-                    public void onClick(View V){
-                        aparecedia(findViewById(datePicker))
-                    }
-                }
-        );
-    }
-}
-*/
 
 
     public static double GetJulianDate(Calendar calendarDate){
