@@ -60,7 +60,7 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
                             mudaResultado();
                         }
                     }, hour, minute, true);
-                    mTimePicker.setTitle("Que horas voc� nasceu?");
+                    mTimePicker.setTitle("Que horas você nasceu?");
                     mTimePicker.show();
                     break;
                 case R.id.data:
@@ -76,7 +76,7 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
                             mudaResultado();
                         }
                     }, ano, mes, dia);
-                    mDatePicker.setTitle("Que dia voc� nasceu?");
+                    mDatePicker.setTitle("Que dia você nasceu?");
                     mDatePicker.show();
                     break;
                 default:
@@ -104,10 +104,10 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
             int minuto1=Integer.parseInt(horaIn.substring(horaIn.indexOf(":")+1));
             calendar = new GregorianCalendar(ano1,mes1,dia1,hora1,minuto1);
             double nasceu = GetJulianDate(calendar);
-            ((TextView) findViewById(R.id.dias)).setText(String.valueOf((int) (atual-nasceu)));
+            ((TextView) findViewById(R.id.Dias)).setText(String.valueOf((int) (atual-nasceu)));
             ((TextView) findViewById(R.id.Meses)).setText(String.valueOf((int) (atual/30.4375-nasceu/30.4375)));
             ((TextView) findViewById(R.id.Semanas)).setText(String.valueOf((int) (atual/7-nasceu/7)));
-            ((TextView) findViewById(R.id.horas)).setText(String.valueOf((int) (atual*24-nasceu*24)));
+            ((TextView) findViewById(R.id.Horas)).setText(String.valueOf((int) (atual*24-nasceu*24)));
             ((TextView) findViewById(R.id.Minutos)).setText(String.valueOf((int) (atual*1440-nasceu*1440)));
             ((TextView) findViewById(R.id.Segundos)).setText(String.valueOf((int) (atual*86400-nasceu*86400)));
         }
