@@ -5,27 +5,59 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Nascimento_input extends AppCompatActivity implements View.OnClickListener {
-    //private AdView adView;
+public class Nascimento_input extends AppCompatActivity implements View.OnClickListener,RewardedVideoAdListener {
+
+    private InterstitialAd mInterstitialAd;
+    private Button mWatchButton;
+    private RewardedVideoAd mAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nascimento_input);
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3080914425533160/3058456934");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+        });
+        mWatchButton=(Button) findViewById(R.id.botao);
+        mAd = MobileAds.getRewardedVideoAdInstance(this);
+        mAd.setRewardedVideoAdListener(this);
+        loadAd();
+        //mWatchButton.setEnabled(false);
+        mWatchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mAd.isLoaded()){
+                    mAd.show();
+                }
+            }
+        });
         MobileAds.initialize(this,"ca-app-pub-3080914425533160~1647919339");
         final EditText Edit_Time = (EditText) findViewById(R.id.hora);
         Edit_Time.setOnClickListener(this);
@@ -39,11 +71,59 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
         mudaResultado();
+    }
 
+    private void loadAd(){
+        if (!mAd.isLoaded()){
+            mAd.loadAd("ca-app-pub-3080914425533160/2918856138",new AdRequest.Builder().build());
+        }
+    }
+
+    public void onRewardedVideoAdLoaded(){
+        //mWatchButton.setEnabled(true);
+    }
+
+    @Override
+    public void onRewardedVideoAdOpened() {
 
     }
-        @Override
+
+    @Override
+    public void onRewardedVideoStarted() {
+
+    }
+
+    @Override
+    public void onRewardedVideoAdClosed() {
+
+    }
+
+    @Override
+    public void onRewarded(RewardItem rewardItem) {
+
+    }
+
+    @Override
+    public void onRewardedVideoAdLeftApplication() {
+
+    }
+
+    @Override
+    public void onRewardedVideoAdFailedToLoad(int i) {
+
+    }
+
+
+    @Override
         public void onClick(View v){
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            } else {
+                Log.d("TAG", "The interstitial wasn't loaded yet.");
+            }
+            /*if (mAd.isLoaded()){
+                mAd.show();
+            }*/
             switch (v.getId()) {
                 case R.id.hora:
                     Calendar mcurrentTime = Calendar.getInstance();

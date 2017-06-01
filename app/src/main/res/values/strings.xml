@@ -25,4 +25,5 @@
     <string name="minutosTexto">Minutos</string>
     <string name="segundosTexto">Segundos</string>
     <string name="semanasTexto">Semanas</string>
+    <string name="botao">assista e ajude</string>
 </resources>
