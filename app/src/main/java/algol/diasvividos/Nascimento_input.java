@@ -26,18 +26,16 @@ import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Nascimento_input extends AppCompatActivity implements View.OnClickListener,RewardedVideoAdListener {
+public class Nascimento_input extends AppCompatActivity implements View.OnClickListener{
 
     private InterstitialAd mInterstitialAd;
-    private Button mWatchButton;
-    private RewardedVideoAd mAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nascimento_input);
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3080914425533160/3058456934");
+        mInterstitialAd.setAdUnitId("ca-app-pub-4165215562050947/2874666510");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
@@ -45,74 +43,16 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
             }
         });
-        mWatchButton=(Button) findViewById(R.id.botao);
-        mAd = MobileAds.getRewardedVideoAdInstance(this);
-        mAd.setRewardedVideoAdListener(this);
-        loadAd();
-        //mWatchButton.setEnabled(false);
-        mWatchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mAd.isLoaded()){
-                    mAd.show();
-                }
-            }
-        });
-        MobileAds.initialize(this,"ca-app-pub-3080914425533160~1647919339");
+        MobileAds.initialize(this,"ca-app-pub-4165215562050947~5825119711");
         final EditText Edit_Time = (EditText) findViewById(R.id.hora);
         Edit_Time.setOnClickListener(this);
         final EditText Edit_Data = (EditText) findViewById(R.id.data);
         Edit_Data.setOnClickListener(this);
         AdView adView = (AdView)findViewById(R.id.adView2);
-        //adView.setAdSize(AdSize.BANNER);
-        //adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
-        //adView = (AdView)findViewById(R.id.adView);
-        //AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
         mudaResultado();
     }
-
-    private void loadAd(){
-        if (!mAd.isLoaded()){
-            mAd.loadAd("ca-app-pub-3080914425533160/2918856138",new AdRequest.Builder().build());
-        }
-    }
-
-    public void onRewardedVideoAdLoaded(){
-        //mWatchButton.setEnabled(true);
-    }
-
-    @Override
-    public void onRewardedVideoAdOpened() {
-
-    }
-
-    @Override
-    public void onRewardedVideoStarted() {
-
-    }
-
-    @Override
-    public void onRewardedVideoAdClosed() {
-
-    }
-
-    @Override
-    public void onRewarded(RewardItem rewardItem) {
-
-    }
-
-    @Override
-    public void onRewardedVideoAdLeftApplication() {
-
-    }
-
-    @Override
-    public void onRewardedVideoAdFailedToLoad(int i) {
-
-    }
-
 
     @Override
         public void onClick(View v){
@@ -126,7 +66,7 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
             }*/
             switch (v.getId()) {
                 case R.id.hora:
-                    Calendar mcurrentTime = Calendar.getInstance();
+                    Calendar mcurrentTime = getCalen();
                     int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                     int minute = mcurrentTime.get(Calendar.MINUTE);
 
@@ -134,7 +74,7 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
                     mTimePicker = new TimePickerDialog(Nascimento_input.this, new TimePickerDialog.OnTimeSetListener() {
                         @Override
                         public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                            if (selectedMinute>10){
+                            if (selectedMinute>9){
                             ((EditText) findViewById(R.id.hora)).setText(selectedHour + ":" + selectedMinute);}
                             else{((EditText) findViewById(R.id.hora)).setText(selectedHour + ":0" + selectedMinute);}
                             mudaResultado();
@@ -144,7 +84,7 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
                     mTimePicker.show();
                     break;
                 case R.id.data:
-                    Calendar mcurrentDay = Calendar.getInstance();
+                    Calendar mcurrentDay = getCalen();
                     int ano = mcurrentDay.get(Calendar.YEAR);
                     int mes = mcurrentDay.get(Calendar.MONTH);
                     int dia = mcurrentDay.get(Calendar.DAY_OF_MONTH);
@@ -164,6 +104,19 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
             }
         }
 
+        public Calendar getCalen(){
+            String diaIn=((TextView) findViewById(R.id.data)).getText().toString();
+            int dia1= Integer.parseInt(diaIn.substring(0,diaIn.indexOf("/")));
+            diaIn=diaIn.substring(diaIn.indexOf("/")+1);
+            int mes1= Integer.parseInt(diaIn.substring(0,diaIn.indexOf("/")))-1;
+            int ano1=Integer.parseInt(diaIn.substring(diaIn.indexOf("/")+1));
+            String horaIn=((TextView) findViewById(R.id.hora)).getText().toString();
+            int hora1= Integer.parseInt(horaIn.substring(0,horaIn.indexOf(":")));
+            int minuto1=Integer.parseInt(horaIn.substring(horaIn.indexOf(":")+1));
+            Calendar calendar = new GregorianCalendar(ano1,mes1,dia1,hora1,minuto1);
+            return calendar;
+        };
+
         public void mudaResultado(){
             Calendar mcurrent = Calendar.getInstance();
             int hour = mcurrent.get(Calendar.HOUR_OF_DAY);
@@ -174,7 +127,7 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
             int dia = mcurrent.get(Calendar.DAY_OF_MONTH);
             Calendar calendar = new GregorianCalendar(ano,mes,dia,hour,minute,second);
             double atual = GetJulianDate(calendar);
-            String diaIn=((TextView) findViewById(R.id.data)).getText().toString();
+            /*String diaIn=((TextView) findViewById(R.id.data)).getText().toString();
             int dia1= Integer.parseInt(diaIn.substring(0,diaIn.indexOf("/")));
             diaIn=diaIn.substring(diaIn.indexOf("/")+1);
             int mes1= Integer.parseInt(diaIn.substring(0,diaIn.indexOf("/")))-1;
@@ -182,7 +135,8 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
             String horaIn=((TextView) findViewById(R.id.hora)).getText().toString();
             int hora1= Integer.parseInt(horaIn.substring(0,horaIn.indexOf(":")));
             int minuto1=Integer.parseInt(horaIn.substring(horaIn.indexOf(":")+1));
-            calendar = new GregorianCalendar(ano1,mes1,dia1,hora1,minuto1);
+            calendar = new GregorianCalendar(ano1,mes1,dia1,hora1,minuto1);*/
+            calendar = getCalen();
             double nasceu = GetJulianDate(calendar);
             ((TextView) findViewById(R.id.Dias)).setText(String.valueOf((int) (atual-nasceu)));
             ((TextView) findViewById(R.id.Meses)).setText(String.valueOf((int) (atual/30.4375-nasceu/30.4375)));
@@ -192,7 +146,10 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
             ((TextView) findViewById(R.id.Segundos)).setText(String.valueOf((int) (atual*86400-nasceu*86400)));
         }
 
-
+/*    public void onSaveInstanceState(Bundle savedInstanceState){
+        savedInstanceState.putString();
+    }
+*/
     public static double GetJulianDate(Calendar calendarDate){
 
         int year = calendarDate.get(Calendar.YEAR);
