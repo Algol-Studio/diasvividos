@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +36,18 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
     static final String DATA = "data";
     static final String HORA = "hora";
     public static final String MyPREFERENCES = "MyPrefs" ;
+    int adban,adinter;
+
+    public static int getmJD() {
+        return mJD;
+    }
+
+    public static void setmJD(int mJD) {
+        Nascimento_input.mJD = mJD;
+    }
+
+    private static int mJD = 0;
+    //public final ConstraintLayout adscontainer = (ConstraintLayout) findViewById(R.id.layoutao);
     SharedPreferences sharedPreferences;// = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
     @Override
@@ -47,26 +61,29 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
             ((EditText) findViewById(R.id.data)).setText(tex1);
             ((EditText) findViewById(R.id.hora)).setText(tex);
         }
-        /*if (savedInstanceState!=null){
-            ((EditText) findViewById(R.id.hora)).setText(savedInstanceState.getString(HORA));
-            ((EditText) findViewById(R.id.data)).setText(savedInstanceState.getString(DATA));
-        }*/
-        mInterstitialAd = new InterstitialAd(this);
+        else{
+            ((EditText) findViewById(R.id.data)).setText("01/01/2001");
+            ((EditText) findViewById(R.id.hora)).setText("00:00");
+        }
+        /*mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-4165215562050947/2874666510");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {mInterstitialAd.loadAd(new AdRequest.Builder().build());
             }
-        });
+        });*/
         MobileAds.initialize(this,"ca-app-pub-4165215562050947~5825119711");
         final EditText Edit_Time = (EditText) findViewById(R.id.hora);
         Edit_Time.setOnClickListener(this);
         final EditText Edit_Data = (EditText) findViewById(R.id.data);
         Edit_Data.setOnClickListener(this);
-        AdView adView = (AdView)findViewById(R.id.adView2);
+        final Button calen = (Button) findViewById(R.id.calen);
+        calen.setOnClickListener(this);
+        final AdView adView = (AdView)findViewById(R.id.adView2);
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
+        adView.setOnClickListener(this);
         mudaResultado();
     }
 
@@ -77,12 +94,19 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
 
     @Override
         public void onClick(View v){
-            if (mInterstitialAd.isLoaded()) {
+            /*if (mInterstitialAd.isLoaded() || adinter<3) {
                 mInterstitialAd.show();
+                adinter++;
             } else {
                 Log.d("TAG", "The interstitial wasn't loaded yet.");
-            }
+            }*/
             switch (v.getId()) {
+                case R.id.calen:
+                    Intent intent = new Intent(getApplicationContext(),calendario.class);
+                    String diaIn = ((TextView) findViewById(R.id.data)).getText().toString();
+                    intent.putExtra("diaIn",diaIn);
+                    startActivity(intent);
+                    break;
                 case R.id.hora:
                     Calendar mcurrentTime = getCalen();
                     int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
@@ -129,7 +153,7 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
                     int mes = mcurrentDay.get(Calendar.MONTH);
                     int dia = mcurrentDay.get(Calendar.DAY_OF_MONTH);
                     DatePickerDialog mDatePicker;
-                    mDatePicker = new DatePickerDialog(Nascimento_input.this, new DatePickerDialog.OnDateSetListener() {
+                    mDatePicker = new DatePickerDialog(Nascimento_input.this,android.R.style.Theme_Holo_Dialog, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMounth, int selectedDay) {
                             String tex;
@@ -162,6 +186,14 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
                     mDatePicker.setTitle("Que dia você nasceu?");
                     mDatePicker.show();
                     break;
+                case R.id.adView2:
+                    adban++;
+                    if(adban>3){
+                        ConstraintLayout adscontainer = (ConstraintLayout) findViewById(R.id.layoutao);
+                        View admobAds = findViewById(R.id.adView2);
+                        adscontainer.removeView(admobAds);;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -192,6 +224,7 @@ public class Nascimento_input extends AppCompatActivity implements View.OnClickL
             double atual = GetJulianDate(calendar);
             calendar = getCalen();
             double nasceu = GetJulianDate(calendar);
+            setmJD((int) nasceu);
             ((TextView) findViewById(R.id.Dias)).setText(String.valueOf((int) (atual-nasceu)));
             ((TextView) findViewById(R.id.Meses)).setText(String.valueOf((int) (atual/30.4375-nasceu/30.4375)));
             ((TextView) findViewById(R.id.Semanas)).setText(String.valueOf((int) (atual/7-nasceu/7)));

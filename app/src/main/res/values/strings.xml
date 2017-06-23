@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Diasvividos</string>
+    <string name="app_name">Calendário da vida</string>
     <string name="data">Data</string>
     <string name="dias">Dias</string>
     <string name="diasBotao">Dias</string>
@@ -10,20 +10,21 @@
     <string name="nascimento">Nascimento</string>
     <string name="segundos">Segundos</string>
     <string name="semanas">Semanas</string>
-    <string name="banner_ad_unit_id">ca-app-pub-4165215562050947/2095937315</string>
-    <string name="resultado">0</string>
-    <string name="resultadoMes">0</string>
-    <string name="resultadoSemana">0</string>
-    <string name="resultadoHora">0</string>
-    <string name="resultadoMinuto">0</string>
-    <string name="resultadoSegundo">0</string>
-    <string name="horaInputada">00:00</string>
-    <string name="diaInputado">01/01/2000</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-4165215562050947/2095937315</string>
+    <string name="resultado" translatable="false">0</string>
+    <string name="resultadoMes" translatable="false">0</string>
+    <string name="resultadoSemana" translatable="false">0</string>
+    <string name="resultadoHora" translatable="false">0</string>
+    <string name="resultadoMinuto" translatable="false">0</string>
+    <string name="resultadoSegundo" translatable="false">0</string>
+    <string name="horaInputada" translatable="false">00:00</string>
+    <string name="diaInputado" translatable="false">01/01/2000</string>
     <string name="diasTexto">Dias</string>
     <string name="horasTexto">Horas</string>
     <string name="mesesTexto">Meses</string>
     <string name="minutosTexto">Minutos</string>
     <string name="segundosTexto">Segundos</string>
     <string name="semanasTexto">Semanas</string>
-    <string name="botao">assista e ajude</string>
+    <string name="button">Calendário</string>
+    <string name="voltar">Voltar</string>
 </resources>

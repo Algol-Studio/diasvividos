@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Life Calendar</string>
+    <string name="data">Date</string>
+    <string name="dias">Days</string>
+    <string name="diasBotao">Days</string>
+    <string name="diasTexto">Days</string>
+    <string name="horario">Time</string>
+    <string name="horas">Hours</string>
+    <string name="horasTexto">Hours</string>
+    <string name="meses">Mounths</string>
+    <string name="mesesTexto">Mounths</string>
+    <string name="minutos">Minutes</string>
+    <string name="minutosTexto">Minutes</string>
+    <string name="nascimento">Birthday</string>
+    <string name="segundos">Seconds</string>
+    <string name="segundosTexto">Seconds</string>
+    <string name="semanas">Weeks</string>
+    <string name="semanasTexto">Weeks</string>
+    <string name="button">Calendar</string>
+    <string name="voltar">Back</string>
+</resources>
