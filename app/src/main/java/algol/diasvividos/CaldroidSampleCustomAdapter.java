@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,10 +33,11 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View cellView = convertView;
+        //(ConstraintLayout) getView().findViewById(R.id.calendao)
 
         // For reuse
         if (convertView == null) {
-            cellView = inflater.inflate(R.layout.custom_cell, null);
+            cellView = inflater.inflate(R.layout.custom_cell, parent, false);
         }
 
         int topPadding = cellView.getPaddingTop();

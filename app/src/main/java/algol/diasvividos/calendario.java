@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -107,6 +108,7 @@ public class calendario extends AppCompatActivity implements View.OnClickListene
                 // Attach to the activity
                 FragmentTransaction t = getSupportFragmentManager().beginTransaction();
                 t.replace(R.id.calendarView, caldroidFragment);
+                (findViewById(R.id.calendarView)).setAlpha(1);
                 t.commit();
 
                 // Setup listener

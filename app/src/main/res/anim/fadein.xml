@@ -6,18 +6,18 @@
         android:toXScale="1.0"
         android:fromYScale="0.01"
         android:toYScale="0.01"
-        android:duration="1000"
+        android:duration="500"
         android:pivotX="50%"
         android:pivotY="37%" >
     </scale>
 
     <scale xmlns:android="http://schemas.android.com/apk/res/android"
-        android:startOffset="1000"
+        android:startOffset="500"
         android:fromXScale="1.0"
         android:toXScale="1.0"
         android:fromYScale="1"
         android:toYScale="100"
-        android:duration="1000"
+        android:duration="500"
         android:pivotX="50%"
         android:pivotY="37%" >
     </scale>
